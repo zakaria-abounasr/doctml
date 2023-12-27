@@ -153,8 +153,7 @@
 		                                                                                                            
 		public function closeHTMLPrint() {
 
-		  $html = "\n".'<div id="response"></div>';
-		  $html .= "\n\t".'</body>';
+		  $html = "\n\t".'</body>';
 		  $html .= "\n".'</html>';  
 			
 			return $html;
