@@ -8,8 +8,179 @@
 		public $js_files = [];
 		public $javascripts = [];
 		public $items = [];
+		public $elements = [];
 
 		public function __construct() {}
+		
+		public function source($file) {
+			if (isset($file) && is_string($file)) {
+				if (file_exists($file)) {
+					$this->readFile($file);
+					$this->constructElements();
+				}
+			}
+		}
+		
+		public function readFile($file) {
+			if (isset($file) && is_string($file)) {
+				if (file_exists($file)) {
+					foreach (file($file) as $line) {
+						
+						// ------------------------------
+						
+						$line = trim($line);
+
+						$element = null;
+						$settings = [];
+						$id = null;
+						$class = null;
+						$content = null;
+						
+						// ------------------------------
+						
+						if (!strpos($line, ' ')) { 
+							$line .= ' '; 
+						}
+						
+						// ------------------------------------------------------------
+						
+						while (string_starts_by($line, ['@', '#', '.']) && (@$i++ < 20)) {
+
+							// ------------------------------------
+							
+							if (string_starts_by($line, '@')) {
+								
+								$element_settings = substr($line, 0, strpos($line, ' '));
+								$line = substr($line, strpos($line, ' ')+1);
+								
+								// -------------------------------------
+								
+								foreach (explode(':', $element_settings) as $piece) {
+									
+									if (string_starts_by($piece, '@')) {
+										$element = substr($piece, 1);
+									}
+									
+									else {
+										$settings[] = $piece;
+									}
+									
+								}
+								
+							}
+								
+							// ------------------------------------
+	
+							if (string_starts_by($line, '#')) {
+								
+								$id = substr($line, 1, strpos($line, ' ')-1);
+								$line = substr($line, strpos($line, ' ')+1);
+															
+							}
+							
+							// ------------------------------------
+							
+							if (string_starts_by($line, '.')) {
+								
+								$class = substr($line, 1, strpos($line, ' '-1));
+								$line = substr($line, strpos($line, ' ')+1);
+								
+							}
+							
+						}
+						
+						// ------------------------------------
+						
+						// if (!string_starts_by($line, ['@', '#', '.'])) {
+							echo $line.' ';
+							$content = $line;
+						// }
+						
+						// ------------------------------------
+						
+						$this->elements[] = [ 'element' => @$element, 'settings' => @$settings, 'id' => @$id, 'class' => @$class, 'content' => @$content ];
+						
+						// ------------------------------------
+						
+					}
+				}
+			}
+			
+		}
+		
+		public function constructElements() {
+			foreach ($this->elements as $element) {
+				
+				if (!empty($element['element'])) {
+					if (!empty($element['settings'])) {
+				
+						foreach ($element['settings'] as $setting_index => $setting) {
+							switch ($setting) {
+								
+								case 'top':
+									$style = ['align-self' => 'flex-start'];
+									
+								case 'bottom':
+									$style = ['align-self' => 'flex-end'];
+									
+								case 'left':
+									$style = ['justify-self' => 'flex-start'];
+									
+								case 'right':
+									$style = ['justify-self' => 'flex-end'];
+									
+								case 'center':
+									
+									if (!in_array('top', $element['settings']) && !in_array('bottom', $element['settings'])) {
+										$style = ['align-self' => 'center'];
+									}
+									
+									if (!in_array('left', $element['settings']) && !in_array('right', $element['settings'])) {
+										$style = ['justify-self' => 'center'];
+									}
+								
+								case 'beginning':
+									$content[1] = $element['content'];
+									$current_content_index = 1;
+									break;
+								
+								case 'middle':
+									$content[2] = $element['content'];
+									$current_content_index = 2;
+									break;
+								
+								case 'end':
+									$content[3] = $element['content'];
+									$current_content_index = 3;
+									break;
+									
+								case 'bloc':
+									$content = $element['content'];
+									$current_content_index = 0;
+									
+							}
+						}
+					}
+					
+					if (!isset($content)) {
+						$content = $element['content'];
+						$current_content_index = 0;
+					}
+					
+				}
+				
+				$this->setItem(null, new Item([
+					'id' => $element['id'],
+					'class' => [@$element['element'], $element['class']],
+					'content' => @$content,
+					'style' => @$style
+				]));
+				
+				unset ($content);
+				unset ($style);
+				
+			}
+		}
 		
 		public function setItem($name, $data) {
 			if (isset($name) && is_string($name)) {

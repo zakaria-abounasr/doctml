@@ -1,0 +1,6 @@
+.gitignore
+mysql
+mysqldump
+lib/tools
+doctml.*
+

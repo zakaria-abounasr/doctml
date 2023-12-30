@@ -1,0 +1,59 @@
+@title #main_title
+Fiche d'intervention
+
+@label Client 
+@textarea zakaria
+
+@label Description
+@textarea
+
+@--------------------------------
+
+@left
+@table
+
+@line
+@size:2
+@label Besoins / Préparation
+
+@repeat:3/9
+@line
+@checkbox
+@textarea
+
+@---------------------------------
+
+@right
+@table
+
+@line
+@size:2
+@label Besoins / Préparation
+
+@line
+@checkbox Executée
+@textarea
+
+@line
+@checkbox Enregistrée
+@textarea
+
+@line
+@checkbox Rapport établi
+@textarea
+
+@line
+@checkbox Pièces remises
+@textarea
+
+@line
+@checkbox Documents remis
+@textarea
+
+@line
+@checkbox Commande établie
+@textarea
+
+@line
+@checkbox Clôturée
+@textarea
