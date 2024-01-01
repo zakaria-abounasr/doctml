@@ -12,6 +12,10 @@
 
 		public function __construct() {}
 		
+		public function globalStyle() {
+			return ['display' => 'flex', 'flex' => '1', 'flex-basis' => '30%', 'width' => '100%'];
+		}
+		
 		public function source($file) {
 			if (isset($file) && is_string($file)) {
 				if (file_exists($file)) {
@@ -22,86 +26,110 @@
 		}
 		
 		public function readFile($file) {
+			
 			if (isset($file) && is_string($file)) {
 				if (file_exists($file)) {
-					foreach (file($file) as $line) {
-						
-						// ------------------------------
-						
+					$file_array = file($file);
+				}
+			}
+			
+			if (isset($file_array)) {
+				foreach ($file_array as $line_index => $line) {
+
+					// ------------------------------
+					
+					if (!empty($line) || ($line == 0)) {
+				
 						$line = trim($line);
 
-						$element = null;
-						$settings = [];
-						$id = null;
-						$class = null;
-						$content = null;
-						
 						// ------------------------------
 						
-						if (!strpos($line, ' ')) { 
+						if (!string_ends_by($line, ' ')) { 
 							$line .= ' '; 
 						}
 						
 						// ------------------------------------------------------------
 						
-						while (string_starts_by($line, ['@', '#', '.']) && (@$i++ < 20)) {
-
-							// ------------------------------------
-							
-							if (string_starts_by($line, '@')) {
+						if (string_starts_by($line, ['@', '#', '.'])) {
+							while (string_starts_by($line, ['@', '#', '.'])) {
+	
+								// ------------------------------------
 								
-								$element_settings = substr($line, 0, strpos($line, ' '));
-								$line = substr($line, strpos($line, ' ')+1);
-								
-								// -------------------------------------
-								
-								foreach (explode(':', $element_settings) as $piece) {
+								if (string_starts_by($line, '@')) {
 									
-									if (string_starts_by($piece, '@')) {
-										$element = substr($piece, 1);
-									}
+									$element_settings = substr($line, 0, strpos($line, ' '));
+									$line = substr($line, strpos($line, ' ')+1);
 									
-									else {
-										$settings[] = $piece;
+									// -------------------------------------
+									
+									foreach (explode(':', $element_settings) as $piece) {
+										
+										if (string_starts_by($piece, '@')) {
+											$element = substr($piece, 1);
+										}
+										
+										else {
+											$settings[] = $piece;
+										}
+										
 									}
 									
 								}
+									
+								// ------------------------------------
+		
+								else if (string_starts_by($line, '#')) {
+									
+									$id = substr($line, 1, strpos($line, ' ')-1);
+									$line = substr($line, strpos($line, ' ')+1);
+																
+								}
+								
+								// ------------------------------------
+								
+								else if (string_starts_by($line, '.')) {
+									
+									$class = substr($line, 1, strpos($line, ' '-1));
+									$line = substr($line, strpos($line, ' ')+1);
+									
+								}
+								
+								else {
+									break;
+								}
 								
 							}
-								
-							// ------------------------------------
-	
-							if (string_starts_by($line, '#')) {
-								
-								$id = substr($line, 1, strpos($line, ' ')-1);
-								$line = substr($line, strpos($line, ' ')+1);
-															
-							}
-							
-							// ------------------------------------
-							
-							if (string_starts_by($line, '.')) {
-								
-								$class = substr($line, 1, strpos($line, ' '-1));
-								$line = substr($line, strpos($line, ' ')+1);
-								
-							}
-							
 						}
 						
 						// ------------------------------------
 						
-						// if (!string_starts_by($line, ['@', '#', '.'])) {
-							echo $line.' ';
-							$content = $line;
-						// }
+						if (!empty(trim($line))) {
+							$content[] = $line;
+						}
 						
 						// ------------------------------------
 						
-						$this->elements[] = [ 'element' => @$element, 'settings' => @$settings, 'id' => @$id, 'class' => @$class, 'content' => @$content ];
+						if (isset($file_array[$line_index+1])) {
+							
+							$next_line = $file_array[$line_index+1];
+							
+							// ------------------------------------
+							
+							if (string_starts_by($next_line, ['@', '#', '.'])) {
+								
+								$this->elements[] = [ 'element' => @$element, 'settings' => @$settings, 'id' => @$id, 'class' => @$class, 'content' => @$content ];
+								
+								$element = null;
+								$settings = [];
+								$id = null;
+								$class = null;
+								$content = null;
+								 
+							}
+						}
 						
 						// ------------------------------------
-						
+					
 					}
 				}
 			}
@@ -140,44 +168,72 @@
 									}
 								
 								case 'beginning':
-									$content[1] = $element['content'];
-									$current_content_index = 1;
+									$position = 'beginning';
 									break;
 								
 								case 'middle':
-									$content[2] = $element['content'];
-									$current_content_index = 2;
+									$position = 'middle';
 									break;
 								
 								case 'end':
-									$content[3] = $element['content'];
-									$current_content_index = 3;
+									$position = 'end';
 									break;
 									
 								case 'bloc':
-									$content = $element['content'];
-									$current_content_index = 0;
+									$position = 'bloc';
 									
 							}
 						}
 					}
-					
-					if (!isset($content)) {
-						$content = $element['content'];
-						$current_content_index = 0;
+										
+					if (!isset($position)) {
+						$position = 'bloc';
 					}
+					
+					if (empty($style)) {
+						$style = [];
+					}
+
+					$item = new Item([
+						'id' => @$element['id'],
+						'class' => [@$element['element'], @$element['class']],
+						'content' => @$element['content'],
+						'style' => array_merge($this->globalStyle(), $style)
+					]);
+					
+					if ($position == 'bloc') {
+						$items[] = new div([ $item, 'style' => $this->globalStyle() ]);
+						$item_key = @sizeof($items);
+					}
+					
+					else {
+						if (!isset($items[$item_key])) {
+							$items[$item_key] = new Item([ [null, null, null], 'style' => $this->globalStyle() ]);
+						}
+						
+						if ($position == 'beginning') {
+							$items[$item_key]->content[0] = $item;
+						}
+						
+						else if ($position == 'middle') {
+							$items[$item_key]->content[1] = $item;
+						}
+						
+						else if ($position == 'end') {
+							$items[$item_key]->content[2] = $item;
+						}
+						
+					}
+					
+					unset ($content);
+					unset ($style);
+					unset ($position);
 					
 				}
 				
-				$this->setItem(null, new Item([
-					'id' => $element['id'],
-					'class' => [@$element['element'], $element['class']],
-					'content' => @$content,
-					'style' => @$style
-				]));
-				
-				unset ($content);
-				unset ($style);
+				if (isset($items)) {
+					$this->setItem('@main', div([ $items ]));
+				}
 				
 			}
 		}
