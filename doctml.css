@@ -1,13 +1,51 @@
-#main_title {
-	color: red;
-	border: solid thin red;
+#doctml .top {
+	vertical-align: top;	
+	align-self: flex-start;
 }
 
-.title {
+#doctml .bottom {
+	vertical-align: bottom;
+	align-self: flex-end;	
+}
+
+#doctml .vcenter {
+	vertical-align: middle;
+	align-self: center;
+}
+
+#doctml .left {
+	text-align: left;	
+	justify-self: flex-start;
+}
+
+#doctml .right {
+	text-align: right;
+	justify-self: flex-end;	
+}
+
+#doctml .hcenter {
+	text-align: center;
+	justify-self: center;	
+}
+
+#doctml .wrapper {
+	display: flex;
+	width: 100%;
+}
+
+#doctml .wrapper div {
+	flex: 1;
+}
+
+#doctml .title {
 	font-size: 16px;
 	font-weight: bold;
 }
 
-.textarea {
-	border: solid thin blue;
+#doctml .textarea {
+}
+
+#doctml #main_title {
+	color: red;
+	border: solid thin red;
 }

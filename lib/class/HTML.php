@@ -12,9 +12,11 @@
 
 		public function __construct() {}
 		
+		/*
 		public function globalStyle() {
 			return ['display' => 'flex', 'flex' => '1', 'flex-basis' => '30%', 'width' => '100%'];
 		}
+		*/
 		
 		public function source($file) {
 			if (isset($file) && is_string($file)) {
@@ -140,37 +142,42 @@
 			foreach ($this->elements as $element) {
 				
 				if (!empty($element['element'])) {
+					$class = $element['class'];
+					
 					if (!empty($element['settings'])) {
-				
 						foreach ($element['settings'] as $setting_index => $setting) {
 							switch ($setting) {
 								
 								case 'top':
-									$style = ['align-self' => 'flex-start'];
+									$class .= ' top';
+									break;
 									
 								case 'bottom':
-									$style = ['align-self' => 'flex-end'];
+									$class .= ' bottom';
+									break;
 									
 								case 'left':
-									$style = ['justify-self' => 'flex-start'];
+									$class .= ' left';
+									break;
 									
 								case 'right':
-									$style = ['justify-self' => 'flex-end'];
+									$class .= ' right';
+									break;
 									
 								case 'center':
-									
 									if (!in_array('top', $element['settings']) && !in_array('bottom', $element['settings'])) {
-										$style = ['align-self' => 'center'];
+										$class .= ' vcenter';
 									}
 									
 									if (!in_array('left', $element['settings']) && !in_array('right', $element['settings'])) {
-										$style = ['justify-self' => 'center'];
+										$class .= ' hcenter';
 									}
-								
+									break;
+									
 								case 'beginning':
 									$position = 'beginning';
 									break;
-								
+									
 								case 'middle':
 									$position = 'middle';
 									break;
@@ -181,46 +188,49 @@
 									
 								case 'bloc':
 									$position = 'bloc';
+									break;
 									
 							}
 						}
 					}
-										
+					
 					if (!isset($position)) {
 						$position = 'bloc';
 					}
 					
-					if (empty($style)) {
-						$style = [];
-					}
-
 					$item = new Item([
 						'id' => @$element['id'],
-						'class' => [@$element['element'], @$element['class']],
+						'class' => [@$element['element'], @$class],
 						'content' => @$element['content'],
-						'style' => array_merge($this->globalStyle(), $style)
+						'style' => @$style
 					]);
 					
-					if ($position == 'bloc') {
-						$items[] = new div([ $item, 'style' => $this->globalStyle() ]);
+					if (($position == 'bloc') || (@$i == $position) || (@$j == $position) || (@$k == $position)) {
+						$items[] = $item;
 						$item_key = @sizeof($items);
+						unset ($i);
+						unset ($j);
+						unset ($k);
 					}
 					
 					else {
 						if (!isset($items[$item_key])) {
-							$items[$item_key] = new Item([ [null, null, null], 'style' => $this->globalStyle() ]);
+							$items[$item_key] = new Item([ '&wrapper', [div([]), div([]), div([])] ]);
 						}
 						
-						if ($position == 'beginning') {
+						if (($position == 'beginning') && !isset($i)) {
 							$items[$item_key]->content[0] = $item;
+							$i = $position;
 						}
 						
 						else if ($position == 'middle') {
 							$items[$item_key]->content[1] = $item;
+							$j = $position;
 						}
 						
 						else if ($position == 'end') {
 							$items[$item_key]->content[2] = $item;
+							$k = $position;
 						}
 						
 					}
@@ -232,7 +242,7 @@
 				}
 				
 				if (isset($items)) {
-					$this->setItem('@main', div([ $items ]));
+					$this->setItem('@doctml', div([ $items ]));
 				}
 				
 			}

@@ -12,18 +12,24 @@ Fiche d'intervention
 Fiche d'intervention
 Fiche d'intervention
 
-@label:end Client 
-@textarea:beginning zakaria
+@label:end:top:center 
+Client jnbeid ubz su zs ubz ygfs ziusb zys bzyszusg zys zgs vyzisv yzfs vzuigs
+Client jnbeid ubz su zs ubz ygfs ziusb zys bzyszusg zys
+zgs vyzisv yzfs vzuigs Client jnbeid ubz su zs ubz ygfs ziusb zys bzyszusg zys zgs vyzisv yzfs vzuigs
+Client jnbeid ubz su zs ubz ygfs
+ziusb zys bzyszusg zys zgs vyzisv yzfs vzuigs Client jnbeid ubz su zs
+bz ygfs ziusb zys bzyszusg zys zgs vyzisv yzfs vzuigs  
 
-@label Description
-@textarea:middle:center izyen,kze
+@textarea:end:right:center zakaria
+n ibsn nb b_yeb eydb ieudbètzsvbuzis uyz sbugs uizsb zyvys zus
+
+@label:middle:left:top Description
+@textarea:middle:center PSNZPZOIHDBZIDN
 
 @--------------------------------
 
-@left
-@table
-
-@line
+@table:right OOOOOOOOOOOOOOOOOOO
+@line:center zuonzidn,zdk
 @size:2
 @label Besoins / Préparation
 
