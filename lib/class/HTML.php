@@ -112,22 +112,25 @@
 						// ------------------------------------
 						
 						if (isset($file_array[$line_index+1])) {
-							
 							$next_line = $file_array[$line_index+1];
+						}
+
+						else {
+							unset ($next_line);
+						}
+						
+						// ------------------------------------
+						
+						if (!isset($next_line) || string_starts_by($next_line, ['@', '#', '.'])) {
 							
-							// ------------------------------------
+							$this->elements[] = [ 'element' => @$element, 'settings' => @$settings, 'id' => @$id, 'class' => @$class, 'content' => @$content ];
 							
-							if (string_starts_by($next_line, ['@', '#', '.'])) {
-								
-								$this->elements[] = [ 'element' => @$element, 'settings' => @$settings, 'id' => @$id, 'class' => @$class, 'content' => @$content ];
-								
-								$element = null;
-								$settings = [];
-								$id = null;
-								$class = null;
-								$content = null;
-								 
-							}
+							$element = null;
+							$settings = [];
+							$id = null;
+							$class = null;
+							$content = null;
+							
 						}
 						
 						// ------------------------------------

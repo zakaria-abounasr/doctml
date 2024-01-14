@@ -269,7 +269,7 @@
 					$print .= "\n";
 				}
 				$print .= $this->printContent();
-				if ($this->tag != 'input') {
+				if (!in_array($this->tag, ['input', 'img'])) {
 					if (!in_array($this->tag, ['a', 'h1', 'h2', 'h3', 'textarea'])) {
 						$print .= "\n";
 					}
@@ -400,7 +400,7 @@
 			}
 			if (isset($events) && is_array($events)) {
 				foreach ($events as $event => $actions) {
-					if (in_array($event, ['load', 'mouseover', 'mousemove', 'mousedown', 'mouseup', 'mouseout', 'keydown', 'click', 'submit', 'change', 'select', 'focus', 'blur', 'input'])) {
+					if (in_array($event, ['load', 'mouseover', 'mousemove', 'mousedown', 'mouseup', 'mouseout', 'keydown', 'click', 'submit', 'change', 'select', 'focus', 'blur', 'input', 'keypress'])) {
 						$this->attributes['on'.$event] = '';
 						if (!empty($actions) && is_array($actions)) {
 							$actions_list = $actions;
@@ -420,7 +420,7 @@
 		}
 		
 		public function addEvent($event, $action) {
-			if (isset($event) && in_array($event, ['load', 'mouseover', 'mousemove', 'mousedown', 'mouseup', 'mouseout', 'keydown', 'click', 'submit', 'change', 'select', 'focus', 'blur', 'input'])) {
+			if (isset($event) && in_array($event, ['load', 'mouseover', 'mousemove', 'mousedown', 'mouseup', 'mouseout', 'keydown', 'click', 'submit', 'change', 'select', 'focus', 'blur', 'input', 'keypress'])) {
 				if (isset($action) && is_string($action)) {
 					if (!isset($this->attributes['on'.$event])) {
 						$this->attributes['on'.$event] = '';

@@ -577,6 +577,18 @@
 		}
 		return null;
 	}
+
+	function sort_array($array, $sort) {
+		foreach ($sort as $key) {
+			if (in_array($key, array_keys($array))) {
+				$new_array[$key] = $array[$key];
+			}
+		}
+		if (!empty($new_array)) {
+			return $new_array;
+		}
+		return [];
+	}
 	
 	function build_sorter($keys_array) {
 		return function ($a, $b) use ($keys_array) {

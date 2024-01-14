@@ -1,76 +1,31 @@
-@title #main_title
-Fiche d'intervention
-Fiche d'intervention
-Fiche d'intervention
-Fiche d'intervention
-Fiche d'intervention
-Fiche d'intervention
-Fiche d'intervention
-Fiche d'intervention
-Fiche d'intervention
-Fiche d'intervention
-Fiche d'intervention
-Fiche d'intervention
+@title #main_title Fiche d'intervention
 
-@label:end:top:center 
-Client jnbeid ubz su zs ubz ygfs ziusb zys bzyszusg zys zgs vyzisv yzfs vzuigs
-Client jnbeid ubz su zs ubz ygfs ziusb zys bzyszusg zys
-zgs vyzisv yzfs vzuigs Client jnbeid ubz su zs ubz ygfs ziusb zys bzyszusg zys zgs vyzisv yzfs vzuigs
-Client jnbeid ubz su zs ubz ygfs
-ziusb zys bzyszusg zys zgs vyzisv yzfs vzuigs Client jnbeid ubz su zs
-bz ygfs ziusb zys bzyszusg zys zgs vyzisv yzfs vzuigs  
+@title Intervention sur SVM 3000
 
-@textarea:end:right:center zakaria
-n ibsn nb b_yeb eydb ieudbètzsvbuzis uyz sbugs uizsb zyvys zus
+@label Client
 
-@label:middle:left:top Description
-@textarea:middle:center PSNZPZOIHDBZIDN
+@span COBOMI
 
-@--------------------------------
+@paragraph:beginning:bottom:right
 
-@table:right OOOOOOOOOOOOOOOOOOO
-@line:center zuonzidn,zdk
-@size:2
-@label Besoins / Préparation
+Paragraph 1: Quelques mots Quelques mots Quelques mots Quelques mots Quelques mots Quelques mots
+Quelques mots Quelques mots Quelques mots Quelques mots Quelques mots Quelques mots
+Quelques mots Quelques mots Quelques mots Quelques mots Quelques mots Quelques mots
 
-@repeat:3/9
-@line
-@checkbox
-@textarea
+@paragraph:end:center:left
 
-@---------------------------------
+Paragraph 2: Quelques mots Quelques mots Quelques mots Quelques mots Quelques mots Quelques mots
+Quelques mots Quelques mots Quelques mots Quelques mots Quelques mots Quelques mots
+Quelques mots Quelques mots Quelques mots Quelques mots Quelques mots Quelques mots
+Quelques mots Quelques mots Quelques mots Quelques mots Quelques mots Quelques mots
+Quelques mots Quelques mots Quelques mots Quelques mots Quelques mots Quelques mots
+Quelques mots Quelques mots Quelques mots Quelques mots Quelques mots Quelques mots
+Quelques mots Quelques mots Quelques mots Quelques mots Quelques mots Quelques mots
 
-@right
-@table
+@paragraph:middle:left:bottom
 
-@line
-@size:2
-@label Besoins / Préparation
-
-@line
-@checkbox Executée
-@textarea
-
-@line
-@checkbox Enregistrée
-@textarea
-
-@line
-@checkbox Rapport établi
-@textarea
-
-@line
-@checkbox Pièces remises
-@textarea
-
-@line
-@checkbox Documents remis
-@textarea
-
-@line
-@checkbox Commande établie
-@textarea
-
-@line
-@checkbox Clôturée
-@textarea
+Paragraph 3: Quelques mots Quelques mots Quelques mots Quelques mots Quelques mots Quelques mots
+Quelques mots Quelques mots Quelques mots Quelques mots Quelques mots Quelques mots
+Quelques mots Quelques mots Quelques mots Quelques mots Quelques mots Quelques mots
+Quelques mots Quelques mots Quelques mots Quelques mots Quelques mots Quelques mots
+Quelques mots Quelques mots Quelques mots Quelques mots Quelques mots Quelques mots
