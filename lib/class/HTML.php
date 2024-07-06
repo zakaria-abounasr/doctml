@@ -52,12 +52,35 @@
 						
 						// ------------------------------------------------------------
 						
-						if (string_starts_by($line, ['@', '#', '.'])) {
-							while (string_starts_by($line, ['@', '#', '.'])) {
+						if (string_starts_by($line, ['&', '@', '#', '.'])) {
+							while (string_starts_by($line, ['&', '@', '#', '.'])) {
 	
 								// ------------------------------------
 								
-								if (string_starts_by($line, '@')) {
+								if (string_starts_by($line, '&')) {
+									
+									$extra_settings = substr($line, 0, strpos($line, ' '));
+									$line = substr($line, strpos($line, ' ')+1);
+									
+									// -------------------------------------
+									
+									foreach (explode(':', $element_settings) as $piece) {
+										
+										if (string_starts_by($piece, '&')) {
+											$extra_setting = substr($piece, 1);
+										}
+										
+										else {
+											$extra_setting_values[] = $piece;
+										}
+										
+									}
+									
+								}
+								
+								// -------------------------------------
+								
+								else if (string_starts_by($line, '@')) {
 									
 									$element_settings = substr($line, 0, strpos($line, ' '));
 									$line = substr($line, strpos($line, ' ')+1);
@@ -121,7 +144,7 @@
 						
 						// ------------------------------------
 						
-						if (!isset($next_line) || string_starts_by($next_line, ['@', '#', '.'])) {
+						if (!isset($next_line) || string_starts_by($next_line, ['&', '@', '#', '.'])) {
 							
 							$this->elements[] = [ 'element' => @$element, 'settings' => @$settings, 'id' => @$id, 'class' => @$class, 'content' => @$content ];
 							

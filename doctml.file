@@ -1,31 +1,7 @@
-@title #main_title Fiche d'intervention
-
-@title Intervention sur SVM 3000
-
-@label Client
-
-@span COBOMI
-
-@paragraph:beginning:bottom:right
-
-Paragraph 1: Quelques mots Quelques mots Quelques mots Quelques mots Quelques mots Quelques mots
-Quelques mots Quelques mots Quelques mots Quelques mots Quelques mots Quelques mots
-Quelques mots Quelques mots Quelques mots Quelques mots Quelques mots Quelques mots
-
-@paragraph:end:center:left
-
-Paragraph 2: Quelques mots Quelques mots Quelques mots Quelques mots Quelques mots Quelques mots
-Quelques mots Quelques mots Quelques mots Quelques mots Quelques mots Quelques mots
-Quelques mots Quelques mots Quelques mots Quelques mots Quelques mots Quelques mots
-Quelques mots Quelques mots Quelques mots Quelques mots Quelques mots Quelques mots
-Quelques mots Quelques mots Quelques mots Quelques mots Quelques mots Quelques mots
-Quelques mots Quelques mots Quelques mots Quelques mots Quelques mots Quelques mots
-Quelques mots Quelques mots Quelques mots Quelques mots Quelques mots Quelques mots
-
-@paragraph:middle:left:bottom
-
-Paragraph 3: Quelques mots Quelques mots Quelques mots Quelques mots Quelques mots Quelques mots
-Quelques mots Quelques mots Quelques mots Quelques mots Quelques mots Quelques mots
-Quelques mots Quelques mots Quelques mots Quelques mots Quelques mots Quelques mots
-Quelques mots Quelques mots Quelques mots Quelques mots Quelques mots Quelques mots
-Quelques mots Quelques mots Quelques mots Quelques mots Quelques mots Quelques mots
+@table:3/2
+&size:1/2 @img SCOMEDICA
+@page_title Rapport d'intervention
+&size:1/2
+@header_info Date: 01/10/2016
+@header_info Version: 01
+@page_title EN03/PG07
